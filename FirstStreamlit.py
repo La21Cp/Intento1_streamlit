@@ -2,7 +2,7 @@ import streamlit as st
 import PyPDF2
 
 # 📂 Ruta del PDF dentro del proyecto (debe estar en la misma carpeta o indicar el path correcto)
-PDF_PATH = "documentos/mi_archivo.pdf"  # Asegúrate de cambiarlo si está en otra carpeta
+PDF_PATH = "documentos/1210-Insurance-2030.pdf"  # Asegúrate de cambiarlo si está en otra carpeta
 
 st.title("📄 Visor de PDF en Streamlit")
 
