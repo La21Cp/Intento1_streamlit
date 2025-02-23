@@ -1,14 +1,24 @@
 import streamlit as st
+import PyPDF2
 
-# Título de la app
-st.title("🎈 Mi Primera App en Streamlit")
+# 📂 Ruta del PDF dentro del proyecto (debe estar en la misma carpeta o indicar el path correcto)
+PDF_PATH = "documentos/mi_archivo.pdf"  # Asegúrate de cambiarlo si está en otra carpeta
 
-# Entrada de usuario
-name = st.text_input("¿Cuál es tu nombre?")
+st.title("📄 Visor de PDF en Streamlit")
 
-# Botón para generar respuesta
-if st.button("Saludar"):
-    if name:
-        st.success(f"¡Hola, {name}! Bienvenido a tu primera app en Streamlit 🚀")
-    else:
-        st.warning("Por favor, ingresa tu nombre.")
+# 📖 Abrir el PDF desde la carpeta del proyecto
+try:
+    with open(PDF_PATH, "rb") as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+
+        # Extraer texto de todas las páginas
+        pdf_text = ""
+        for page in pdf_reader.pages:
+            pdf_text += page.extract_text() + "\n"
+
+    # 📜 Mostrar contenido en Streamlit
+    st.subheader("Contenido del PDF:")
+    st.text_area("Texto extraído:", pdf_text, height=300)
+
+except FileNotFoundError:
+    st.error(f"❌ No se encontró el archivo: {PDF_PATH}. Verifica que está en la carpeta correcta.")
